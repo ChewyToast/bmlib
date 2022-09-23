@@ -10,32 +10,52 @@
 #                                                                              #
 # **************************************************************************** #
 
+# -------------------------- DECLARATION --------------------------
+
+# Libr name
 NAME =			bmlib
 
-LIBFT =			00_libft/libft.a
+# Source files
+SRC =			$(wildcard *.c)
 
-FT_PRINTF =		01_ft_printf/libftprintf.a
+# All the objects (compiled files)
+OBJ =			$(SRC:.c=.o)
 
-H_LIBFT =		00_libft/libft.h
+# Headers files
+H_LIBFT =		$(wildcard *.h)
 
-H_FT_PRINTF =	01_ft_printf/ft_printf_bonus/ft_printf_bonus.h
+# Colors
+DEF_COLOR =		\033[0;39m
+GRAY =			\033[0;90m
+RED =			\033[0;91m
+GREEN =			\033[0;92m
+YELLOW =		\033[0;93m
+BLUE =			\033[0;94m
+MAGENTA =		\033[0;95m
+CYAN =			\033[0;96m
+WHITE =			\033[0;97m
 
-all:		makelibs
+# -------------------------- ACTIONS --------------------------
 
-makelibs:
-			$(MAKE) -C 
+# Compile files and make obj
+%.o:		%.c
+			@echo "$(BLUE) compiling $<"
+			@echo "$(GRAY)"
+			$(CC) $(FLAGS) -c $< -o $@
+			@echo "$(CYAN)----------------------------------------"
 
-$(NAME):	$(OBJS) $(BNS_OBJS) $(LIBR)
-			@ar -rcs $(NAME) $^
+# Link objects and make the library
+$(NAME):	$(OBJ) $(LIBR)
+			@ar -rcs $(NAME) $(OBJ)
+
+all:		$(NAME)
 
 clean:
-			@rm -f	$(OBJS)
-			@rm -f	$(BNS_OBJS)
+			@rm -f	$(OBJ)
 
 fclean:		clean
 			@rm -f	$(NAME)
-			@rm -f	bonus
 
 re:			fclean all
 
-.PHONY: all clean fclean re
+.PHONY:		all clean fclean re
