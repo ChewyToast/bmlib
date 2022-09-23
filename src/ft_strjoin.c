@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/12 00:46:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

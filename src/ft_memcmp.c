@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/12 00:16:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

@@ -1,17 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@42.fr>                      +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 12:00:45 by marvin            #+#    #+#             */
-/*   Updated: 2022/05/26 10:08:48 by bmoll-pe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#ifndef LIBFT_H
-# define LIBFT_H
+#ifndef BMLIB_H
+# define BMLIB_H
 
 // LIBRARY FOR WRITE()
 # include <unistd.h>
@@ -22,11 +10,16 @@
 // LIBRARY FOR MALLOC()
 # include <stdlib.h>
 
+// LIBRARY FOR VA_ARG()
+# include <stdarg.h>
+
+//-------------------LIBFT--------------------
 typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -77,5 +70,19 @@ size_t	ft_strrspn(const char *s, const char *accept);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+//-------------------FT_PRINTF--------------------
+
+int		ft_printf(const char *inp_str, ...);
+ssize_t	ft_read(const char *str, va_list args);
+
+ssize_t	ft_ptoa(unsigned long long int n);
+ssize_t	ft_itoaa(int n, int space, int sign);
+ssize_t	ft_uitoa(unsigned int n);
+ssize_t	ft_10to16(unsigned int n, int mode, int flag);
+
+ssize_t	ft_putcharr(char c);
+ssize_t	ft_putstrr(const char *str);
+int		a_conver_i(const char *nptr);
 
 #endif

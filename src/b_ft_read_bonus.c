@@ -9,7 +9,7 @@
 /*   Updated: 2022/06/12 11:47:56 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "../inc/bmlib.h"
 
 static ssize_t	check_conversion(va_list args, const char *str);
 static ssize_t	check_bonus(va_list args, const char *str);

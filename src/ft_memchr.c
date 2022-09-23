@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/24 01:17:21 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {

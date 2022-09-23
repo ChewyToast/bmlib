@@ -9,8 +9,9 @@
 /*   Updated: 2022/05/12 00:30:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+#include "../inc/bmlib.h"
 
-int	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	int	i;
 

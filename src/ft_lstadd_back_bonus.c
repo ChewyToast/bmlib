@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/26 01:17:48 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *nlst)
 {

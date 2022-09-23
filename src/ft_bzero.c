@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/12 00:16:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 void	ft_bzero(void *s, size_t n)
 {

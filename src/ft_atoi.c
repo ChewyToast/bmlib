@@ -9,7 +9,7 @@
 /*   Updated: 2022/07/01 11:06:26 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 int	ft_atoi(const char *nptr)
 {

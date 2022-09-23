@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/26 21:42:45 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 static int	sizeofint(long int n)
 {

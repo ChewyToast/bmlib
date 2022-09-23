@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/26 21:45:18 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 static size_t	words_counter(char const *s, char c)
 {

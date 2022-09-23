@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/25 01:32:21 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 t_list	*ft_lstlast(t_list *lst)
 {

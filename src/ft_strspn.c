@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/25 11:20:46 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 size_t	ft_strspn(const char *s, const char *accept)
 {

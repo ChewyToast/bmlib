@@ -9,7 +9,7 @@
 /*   Updated: 2022/07/01 11:05:19 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "../inc/bmlib.h"
 
 int	ft_printf(const char *inp_str, ...)
 {

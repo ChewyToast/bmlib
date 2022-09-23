@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/25 02:03:34 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

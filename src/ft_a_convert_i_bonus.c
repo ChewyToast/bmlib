@@ -9,7 +9,7 @@
 /*   Updated: 2022/06/12 11:47:41 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "../inc/bmlib.h"
 
 int	a_conver_i(const char *nptr)
 {

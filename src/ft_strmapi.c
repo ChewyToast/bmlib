@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/12 00:16:00 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {

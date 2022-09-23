@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/24 22:52:11 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 void	ft_putnbr_fd(int n, int fd)
 {

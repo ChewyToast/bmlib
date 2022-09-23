@@ -9,7 +9,7 @@
 /*   Updated: 2022/06/12 11:48:42 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "ft_printf_bonus.h"
+#include "../inc/bmlib.h"
 
 static ssize_t	sizeofint(unsigned int n)
 {

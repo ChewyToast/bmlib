@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/23 10:36:43 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {

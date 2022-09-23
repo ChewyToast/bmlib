@@ -9,7 +9,7 @@
 /*   Updated: 2022/05/26 10:51:48 by bmoll-pe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "libft.h"
+#include "../inc/bmlib.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {

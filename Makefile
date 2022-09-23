@@ -13,16 +13,17 @@
 # -------------------------- DECLARATION --------------------------
 
 # Libr name
-NAME =			bmlib
+NAME =			libft_printf.a
 
 # Source files
-SRC =			$(wildcard *.c)
+SRC =			$(wildcard src/*.c)
+
 
 # All the objects (compiled files)
 OBJ =			$(SRC:.c=.o)
 
 # Headers files
-H_LIBFT =		$(wildcard *.h)
+H_LIBFT =		$(wildcard src/*.h)
 
 # Colors
 DEF_COLOR =		\033[0;39m
@@ -39,14 +40,14 @@ WHITE =			\033[0;97m
 
 # Compile files and make obj
 %.o:		%.c
-			@echo "$(BLUE) compiling $<"
-			@echo "$(GRAY)"
+			@echo "$(BLUE) compiling $<$ $(GRAY)"
 			$(CC) $(FLAGS) -c $< -o $@
-			@echo "$(CYAN)----------------------------------------"
 
 # Link objects and make the library
 $(NAME):	$(OBJ) $(LIBR)
+			@echo "$(CYAN)-----------------------------------------------"
 			@ar -rcs $(NAME) $(OBJ)
+			@echo "	BMLIB SUCCESSFULLY COMPILED ✅"
 
 all:		$(NAME)
 
@@ -57,5 +58,6 @@ fclean:		clean
 			@rm -f	$(NAME)
 
 re:			fclean all
+
 
 .PHONY:		all clean fclean re
