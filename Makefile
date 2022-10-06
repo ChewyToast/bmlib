@@ -15,12 +15,26 @@
 # Lib name
 NAME =			bmlib.a
 
-# .a files
-LIBFT =			librarys/00_libft/libft.a
+# Header for lib
+INCL = 			bmlib.h
 
-PRINTF =		librarys/01_ft_printf/libftprintf.a
+SRC_LIB =		$(shell ls librarys/00_libft/*.c)
 
-GNL = 			librarys/gnl_for_bmlib/gnl.a
+SRC_PRI = 		$(shell ls librarys/01_ft_printf/ft_printf_bonus/*.c)
+
+SRC_GNL =		$(shell ls librarys/gnl_for_bmlib/src/*.c)
+
+OBJS_LIB =		$(SRC_LIB:.c=.o)
+
+OBJS_PRI =		$(SRC_PRI:.c=.o)
+
+OBJS_GNL =		$(SRC_GNL:.c=.o)
+
+ALL_OBJ = 		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
+
+FLAGS =		-Werror -Wextra -Wall
+
+CC = 		gcc
 
 # Path for the subMakefiles
 MAKE_LIB =		librarys/00_libft/
@@ -43,31 +57,36 @@ WHITE =			\033[0;97m
 # -------------------------- ACTIONS --------------------------
 
 all:
-		$(MAKE) sub
-		$(MAKE) $(NAME)
+		@echo "$(YELLOW)\n\n\t\t\t\t\t\t⭐ PREPARING TO COMPILE BMLIB ⭐\n\n\n"
+		@echo "$(CYAN) UPDATING GIT SUBMODULES... ⌛"
+#		@git submodule update --init --recursive
+		@echo "\n"
+		@$(MAKE) $(NAME)
 
-sub:
-		git submodule update --init --recursive
-		@$(MAKE) -C $(MAKE_LIB)
-		@$(MAKE) -C $(MAKE_PRINTF)
-		@$(MAKE) -C $(MAKE_GNL)
+$(NAME): $(ALL_OBJ)
+		@echo "$(YELLOW)\n\nLinking...$(GRAY)"
+		@ar -rcs $(NAME) $(ALL_OBJ)
+		@echo "$(YELLOW)\t\t\t\t\t\t   ---------------------------"
+		@echo "$(GREEN)\n\t\t\t\t\t\t🌐 BMLIB COMPILED SUCCESSFULLY 🌐$(DEF_COLOR)\n"
+		@echo "$(YELLOW)\t\t\t\t\t\t   ---------------------------\n"
 
-$(NAME): $(LIBFT) $(PRINTF) $(GNL)
-		ar -rcs $(NAME) $(LIBFT) $(PRINTF) $(GNL)
+%.o: %.c 
+	@echo "$(BLUE) compiling $<"
+	@echo "$(GRAY)"
+	$(CC) $(FLAGS) -c $< -o $@
+	@echo "$(CYAN)--------------------------------------------------------------"
 
 clean:
-		make clean -C $(MAKE_LIB)
-		make clean -C $(MAKE_PRINTF)
-		make clean -C $(MAKE_GNL)
+		@echo "$(MAGENTA)\n 🧹CLEANING ALL THE OBJECTS🧹\n"
+		@rm -f $(ALL_OBJ)
 
 fclean:
 		$(MAKE) clean
-		make fclean -C $(MAKE_LIB)
-		make fclean -C $(MAKE_PRINTF)
-		make fclean -C $(MAKE_GNL)
+		@echo "\t$(GRAY)     AND"
+		@echo "$(RED)\n     ❌BMLIB.A REMOVED❌\n$(GRAY)"
 		@rm -f	$(NAME)
 
 re:		fclean all
 
 
-.PHONY:		all clean fclean re sub
+.PHONY:		all clean fclean re
