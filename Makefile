@@ -12,18 +12,22 @@
 
 # -------------------------- DECLARATION --------------------------
 
-# Libr name
-NAME =			libft_printf.a
+# Lib name
+NAME =			bmlib.a
 
-# Source files
-SRC =			$(wildcard src/*.c)
+# .a files
+LIBFT =			librarys/00_libft/libft.a
 
+PRINTF =		librarys/01_ft_printf/libftprintf.a
 
-# All the objects (compiled files)
-OBJ =			$(SRC:.c=.o)
+GNL = 			librarys/gnl_for_bmlib/gnl.a
 
-# Headers files
-H_LIBFT =		$(wildcard src/*.h)
+# Path for the subMakefiles
+MAKE_LIB =		librarys/00_libft/
+
+MAKE_PRINTF =	librarys/01_ft_printf/
+
+MAKE_GNL = 		librarys/gnl_for_bmlib/
 
 # Colors
 DEF_COLOR =		\033[0;39m
@@ -38,26 +42,32 @@ WHITE =			\033[0;97m
 
 # -------------------------- ACTIONS --------------------------
 
-# Compile files and make obj
-%.o:		%.c
-			@echo "$(BLUE) compiling $<$ $(GRAY)"
-			$(CC) $(FLAGS) -c $< -o $@
+all:
+		$(MAKE) sub
+		$(MAKE) $(NAME)
 
-# Link objects and make the library
-$(NAME):	$(OBJ) $(LIBR)
-			@echo "$(CYAN)-----------------------------------------------"
-			@ar -rcs $(NAME) $(OBJ)
-			@echo "	BMLIB SUCCESSFULLY COMPILED ✅"
+sub:
+		git submodule update --init --recursive
+		@$(MAKE) -C $(MAKE_LIB)
+		@$(MAKE) -C $(MAKE_PRINTF)
+		@$(MAKE) -C $(MAKE_GNL)
 
-all:		$(NAME)
+$(NAME): $(LIBFT) $(PRINTF) $(GNL)
+		ar -rcs $(NAME) $(LIBFT) $(PRINTF) $(GNL)
 
 clean:
-			@rm -f	$(OBJ)
+		make clean -C $(MAKE_LIB)
+		make clean -C $(MAKE_PRINTF)
+		make clean -C $(MAKE_GNL)
 
-fclean:		clean
-			@rm -f	$(NAME)
+fclean:
+		$(MAKE) clean
+		make fclean -C $(MAKE_LIB)
+		make fclean -C $(MAKE_PRINTF)
+		make fclean -C $(MAKE_GNL)
+		@rm -f	$(NAME)
 
-re:			fclean all
+re:		fclean all
 
 
-.PHONY:		all clean fclean re
+.PHONY:		all clean fclean re sub
