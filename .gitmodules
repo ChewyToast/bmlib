@@ -1,0 +1,9 @@
+[submodule "librarys/00_libft/"] 
+	path = librarys/00_libft
+	url = git@github.com:ChewyToast/00_libft.git
+[submodule "librarys/01_ft_printf"] 
+  path = librarys/01_ft_printf
+  url = git@github.com:ChewyToast/01_ft_printf.git
+[submodule "librarys/gnl_for_bmlib"] 
+  path = librarys/gnl_for_bmlib
+  url = git@github.com:ChewyToast/gnl_for_bmlib.git
