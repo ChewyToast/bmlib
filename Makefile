@@ -58,8 +58,8 @@ WHITE =			\033[0;97m
 
 all:
 		@echo "$(YELLOW)\n\n\t\t\t\t\t\t⭐ PREPARING TO COMPILE BMLIB ⭐\n\n\n"
-		@echo "$(CYAN) UPDATING GIT SUBMODULES... ⌛"
-#		@git submodule update --init --recursive
+		@echo "$(CYAN) UPDATING GIT SUBMODULES... ⌛$(GREEN)"
+		@git submodule update --remote --merge --recursive
 		@echo "\n"
 		@$(MAKE) $(NAME)
 
