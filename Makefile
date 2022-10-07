@@ -53,36 +53,30 @@ BLUE =			\033[0;94m
 MAGENTA =		\033[0;95m
 CYAN =			\033[0;96m
 WHITE =			\033[0;97m
+BLACK =			\033[0;99m
 
 # -------------------------- ACTIONS --------------------------
 
-all:
-		@echo "$(YELLOW)\n\n\t\t\t\t\t\t⭐ PREPARING TO COMPILE BMLIB ⭐\n\n\n"
-		@echo "$(CYAN) UPDATING GIT SUBMODULES... ⌛$(GREEN)"
+all::
+		@echo "$(YELLOW)UPDATING GIT SUBMODULES... ⌛$(GRAY)"
 		@git submodule update --remote --merge --recursive
-		@echo "\n"
+all::
+		@echo "$(BLACK)COMPILATION:"
 		@$(MAKE) $(NAME)
 
-bm::
+bm:
 		@$(MAKE) $(NAME)
-
-
 
 $(NAME):: $(ALL_OBJ)
-		@echo "$(YELLOW)\n\nLinking...$(GRAY)"
+		@echo "$(YELLOW)\nLinking...$(GRAY)"
 		@ar -rcs $(NAME) $(ALL_OBJ)
-		@echo "$(YELLOW)\n-=-=-=-=-=-=-=-=-=- $(WHITE)🌐 BMLIB COMPILED SUCCESSFULLY 🌐 $(YELLOW)-=-=-=-=-=-=-=-=-=-"
-#		@echo "$(YELLOW)\t\t\t\t\t\t   ---------------------------"
-#		@echo "$(GREEN)\n\t\t\t\t\t\t🌐 BMLIB COMPILED SUCCESSFULLY 🌐$(DEF_COLOR)\n"
-#		@echo "$(YELLOW)\t\t\t\t\t\t   ---------------------------\n"
 
 $(NAME)::
-		@echo "$(GREEN)DONE"
+		@echo "$(GREEN)\n🌐 BMLIB COMPILED 🌐"
 
 %.o: %.c 
-	@echo "$(BLUE)compiling $< $(GRAY)"
-	$(CC) $(FLAGS) -c $< -o $@
-	@echo "$(CYAN)--------------------------------------------------------------"
+	@echo "$(BLUE)compiling $(GRAY) $<"
+	@$(CC) $(FLAGS) -c $< -o $@
 
 clean:
 		@echo "$(MAGENTA)CLEANING ALL THE OBJECTS🧹"
