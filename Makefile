@@ -63,10 +63,12 @@ all:
 		@echo "\n"
 		@$(MAKE) $(NAME)
 
-bm:
+bm::
 		@$(MAKE) $(NAME)
 
-$(NAME): $(ALL_OBJ)
+
+
+$(NAME):: $(ALL_OBJ)
 		@echo "$(YELLOW)\n\nLinking...$(GRAY)"
 		@ar -rcs $(NAME) $(ALL_OBJ)
 		@echo "$(YELLOW)\n-=-=-=-=-=-=-=-=-=- $(WHITE)🌐 BMLIB COMPILED SUCCESSFULLY 🌐 $(YELLOW)-=-=-=-=-=-=-=-=-=-"
@@ -74,22 +76,29 @@ $(NAME): $(ALL_OBJ)
 #		@echo "$(GREEN)\n\t\t\t\t\t\t🌐 BMLIB COMPILED SUCCESSFULLY 🌐$(DEF_COLOR)\n"
 #		@echo "$(YELLOW)\t\t\t\t\t\t   ---------------------------\n"
 
+$(NAME)::
+		@echo "$(GREEN)DONE"
+
 %.o: %.c 
 	@echo "$(BLUE)compiling $< $(GRAY)"
 	$(CC) $(FLAGS) -c $< -o $@
 	@echo "$(CYAN)--------------------------------------------------------------"
 
 clean:
-		@echo "$(MAGENTA)\n 🧹CLEANING ALL THE OBJECTS🧹\n"
+		@echo "$(MAGENTA)CLEANING ALL THE OBJECTS🧹"
 		@rm -f $(ALL_OBJ)
 
 fclean:
 		@$(MAKE) clean
-		@echo "\t$(GRAY)     AND"
-		@echo "$(RED)\n     ❌BMLIB.A REMOVED❌\n$(GRAY)"
+		@echo "$(GRAY)&& "
+		@echo "$(RED)BMLIB.A REMOVED❌$(GRAY)"
 		@rm -f	$(NAME)
 
 re:		fclean all
 
+rebm:
+		@$(MAKE) fclean
+		@$(MAKE) bm
 
-.PHONY:		all clean fclean re
+
+.PHONY:		all clean fclean re rebm
