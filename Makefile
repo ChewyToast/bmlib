@@ -6,7 +6,7 @@
 #    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/12 09:32:53 by marvin            #+#    #+#              #
-#    Updated: 2022/05/27 22:37:09 by bmoll-pe         ###   ########.fr        #
+#    Updated: 2022/10/07 22:19:41 by bmoll-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@
 # Lib name
 NAME =			bmlib.a
 
+NAM =			bmlibb.a
 # Header for lib
 INCL = 			bmlib.h
 
@@ -23,6 +24,14 @@ SRC_LIB =		$(shell ls librarys/00_libft/*.c)
 SRC_PRI = 		$(shell ls librarys/01_ft_printf/ft_printf_bonus/*.c)
 
 SRC_GNL =		$(shell ls librarys/gnl_for_bmlib/src/*.c)
+
+LIBFT =			librarys/00_libft/libft.a
+
+PRINTF =		librarys/01_ft_printf/libftprintf.a
+
+GNL =			librarys/gnl_for_bmlib/gnl.a
+
+CMP =			$(shell ls obj/*.o)
 
 OBJS_LIB =		$(SRC_LIB:.c=.o)
 
@@ -60,11 +69,9 @@ BLACK =			\033[0;99m
 all::
 		@echo "$(YELLOW)UPDATING GIT SUBMODULES... ⌛$(GRAY)"
 		@git submodule update --remote --merge --recursive
+
 all::
 		@echo "$(BLACK)COMPILATION:"
-		@$(MAKE) $(NAME)
-
-bm:
 		@$(MAKE) $(NAME)
 
 $(NAME):: $(ALL_OBJ)
@@ -74,9 +81,41 @@ $(NAME):: $(ALL_OBJ)
 $(NAME)::
 		@echo "$(GREEN)\n🌐 BMLIB COMPILED 🌐"
 
+$(NAM):: $(LIBFT)
+		ar -x $(LIBFT)
+		mv *.o obj/
+
+$(NAM):: $(PRINTF)
+		ar -x $(PRINTF)
+		mv *.o obj/
+
+$(NAM):: $(GNL)
+		ar -x $(GNL)
+		mv *.o obj/
+
+$(NAM):: $(LIBFT) $(PRINTF) $(GNL)
+		ar -rcs $(NAM) $(CMP)
+
+$(LIBFT):
+		@$(MAKE) -C librarys/00_libft
+
+$(PRINTF):
+		@$(MAKE) -C librarys/01_ft_printf
+
+$(GNL):
+		@$(MAKE) -C librarys/gnl_for_bmlib
+
+$()
+
 %.o: %.c 
-	@echo "$(BLUE)compiling $(GRAY) $<"
-	@$(CC) $(FLAGS) -c $< -o $@
+		@echo "$(BLUE)compiling $(GRAY) $<"
+		@$(CC) $(FLAGS) -c $< -o $@
+
+the:
+		$(MAKE) $(NAM)
+
+bm:
+		@$(MAKE) $(NAME)
 
 clean:
 		@echo "$(MAGENTA)CLEANING ALL THE OBJECTS🧹"
@@ -88,11 +127,15 @@ fclean:
 		@echo "$(RED)BMLIB.A REMOVED❌$(GRAY)"
 		@rm -f	$(NAME)
 
+fcleanlibs:
+		@$(MAKE) fclean -C librarys/00_libft
+		@$(MAKE) fclean -C librarys/01_ft_printf
+		@$(MAKE) fclean -C librarys/gnl_for_bmlib
+
 re:		fclean all
 
 rebm:
 		@$(MAKE) fclean
 		@$(MAKE) bm
 
-
-.PHONY:		all clean fclean re rebm
+.PHONY:		all clean fclean re rebm the
