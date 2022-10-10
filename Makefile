@@ -137,6 +137,5 @@ $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 $(NAME)::
 				@echo "$(DARK_GREEN)COMPILED ✅$(DEF_COLOR)"
 
-
 # Action names
 .PHONY:			all update bmlib clean fclean re rebm
