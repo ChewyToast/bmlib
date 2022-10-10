@@ -12,8 +12,8 @@
 #ifndef BMLIB_H
 # define BMLIB_H
 
-# include "ft_printf.h"
-# include "libft.h"
-# include "get_next_line.h"
+# include "libraries/00_libft/libft.h"
+# include "libraries/ft_printf/ft_printf_bonus/ft_printf_bonus.h"
+# include "libraries/gnl_for_bmlib/src/get_next_line.h"
 
 #endif

@@ -16,13 +16,13 @@
 NAME =			bmlib.a
 
 # All the source of libft
-SRC_LIB =		$(shell ls librarys/00_libft/*.c)
+SRC_LIB =		$(shell ls libraries/00_libft/*.c)
 
 # All the source of ft_printf
-SRC_PRI = 		$(shell ls librarys/01_ft_printf/ft_printf_bonus/*.c)
+SRC_PRI = 		$(shell ls libraries/01_ft_printf/ft_printf_bonus/*.c)
 
 # All the source of gnl
-SRC_GNL = 		$(shell ls librarys/gnl_for_bmlib/src/*.c)
+SRC_GNL = 		$(shell ls libraries/gnl_for_bmlib/src/*.c | grep -x *_bonus.c)
 
 # All the objects of libft
 OBJS_LIB =		$(SRC_LIB:.c=.o)
@@ -37,13 +37,13 @@ OBJS_GNL =		$(SRC_GNL:.c=.o)
 HEAD_BMLIB =	bmlib.h
 
 # Header of libft
-HEAD_LIB =		$(shell ls librarys/00_libft/*.h)
+HEAD_LIB =		$(shell ls libraries/00_libft/*.h)
 
 # Header of ft_printf
-HEAD_PRF =		$(shell ls librarys/01_ft_printf/ft_printf_bonus/*.h)
+HEAD_PRF =		$(shell ls libraries/01_ft_printf/ft_printf_bonus/*.h)
 
 # Header of gnl
-HEAD_GNL =		$(shell ls librarys/gnl_for_bmlib/src/*.h)
+HEAD_GNL =		$(shell ls libraries/gnl_for_bmlib/src/*.h)
 
 # Git submodule update
 GSU =			git submodule update
@@ -86,27 +86,17 @@ DARK_YELLOW =	\033[38;5;143m
 
 # Main action of the makefile, checks for submodules updates and makes bmlib
 all:
+				@echo "$(BROWN)Updating submodules"
 				@$(MAKE) update
 				@$(MAKE) $(NAME)
 
+# Action to update the git submodules
 update:
-#				git submodule update --init
-				$(GSU) $(GSU_FLAGS)
+				@$(GSU) $(GSU_FLAGS)
 
-# Compiles all the .c files of libft
-librarys/00_libft/%.o : librarys/00_libft/%.c $(HEAD_LIB) $(BMLIB)
-				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
-				@$(GCC) $(FLAGS) -c $< -o $@
-
-# Compiles all the .c files of ft_printf
-librarys/01_ft_printf/ft_printf_bonus/%.o : librarys/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(BMLIB)
-				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
-				@$(GCC) $(FLAGS) -c $< -o $@
-
-# Compiles all the .c files of gnl
-librarys/gnl_for_bmlib/src/%.o : librarys/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(BMLIB)
-				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
-				@$(GCC) $(FLAGS) -c $< -o $@
+# Action to just compile bmlib without checking updates
+bmlib:
+				@$(MAKE) $(NAME)
 
 # Clean all the .o files
 clean:
@@ -124,14 +114,33 @@ re:
 				@$(MAKE) fclean
 				@$(MAKE) all
 
+rebm:
+				@$(MAKE) fclean
+				@$(MAKE) bmlib
+
+# Compiles all the .c files of libft
+libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(BMLIB)
+				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@$(GCC) $(FLAGS) -c $< -o $@
+
+# Compiles all the .c files of ft_printf
+libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(BMLIB)
+				@echo "$⛓️(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@$(GCC) $(FLAGS) -c $< -o $@
+
+# Compiles all the .c files of gnl
+libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(BMLIB)
+				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@$(GCC) $(FLAGS) -c $< -o $@
+
 # Link action
 $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 				@echo "$(BROWN)---------------------------------"
-				@echo "$(DARK_YELLOW)Linking...$(DEF_COLOR)"
+				@echo "$(BROWN)Linking...$(DEF_COLOR)"
 				@$(AR) $@ $^
 $(NAME)::
-				@echo "$(DARK_GREEN)COMPILED$(DEF_COLOR)"
+				@echo "$(DARK_GREEN)COMPILED✅$(DEF_COLOR)"
 
 
 # Action names
-.PHONY:			all update  clean fclean re bmlib.a
+.PHONY:			all update bmlib clean fclean re rebm
