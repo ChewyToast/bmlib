@@ -115,17 +115,17 @@ rebm:
 				@$(MAKE) bmlib
 
 # Compiles all the .c files of libft
-libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(BMLIB)
+libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB)
 				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of ft_printf
-libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(BMLIB)
+libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB)
 				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
-libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(BMLIB)
+libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB)
 				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
