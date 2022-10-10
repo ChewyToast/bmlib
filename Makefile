@@ -86,17 +86,12 @@ DARK_YELLOW =	\033[38;5;143m
 
 # Main action of the makefile, checks for submodules updates and makes bmlib
 all:
-				@echo "$(BROWN)Updating submodules"
-				@$(MAKE) update
 				@$(MAKE) $(NAME)
 
 # Action to update the git submodules
 update:
+				@echo "$(BROWN)Updating submodules"
 				@$(GSU) $(GSU_FLAGS)
-
-# Action to just compile bmlib without checking updates
-bmlib:
-				@$(MAKE) $(NAME)
 
 # Clean all the .o files
 clean:
@@ -125,7 +120,7 @@ libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(BMLIB)
 
 # Compiles all the .c files of ft_printf
 libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(BMLIB)
-				@echo "$⛓️(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
@@ -139,7 +134,7 @@ $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 				@echo "$(BROWN)Linking...$(DEF_COLOR)"
 				@$(AR) $@ $^
 $(NAME)::
-				@echo "$(DARK_GREEN)COMPILED✅$(DEF_COLOR)"
+				@echo "$(DARK_GREEN)COMPILED ✅$(DEF_COLOR)"
 
 
 # Action names
