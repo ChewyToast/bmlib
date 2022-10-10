@@ -3,54 +3,65 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: bmoll-pe <bmoll-pe@student.42bcn>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/05/12 09:32:53 by marvin            #+#    #+#              #
-#    Updated: 2022/10/07 22:19:41 by bmoll-pe         ###   ########.fr        #
+#    Created: 2022/10/10 04:23:57 by bmoll-pe          #+#    #+#              #
+#    Updated: 2022/10/10 04:24:02 by bmoll-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# -------------------------- DECLARATION --------------------------
+# ----------------------------- VAR DECLARATION ------------------------------ #
 
-# Lib name
+# Name value
 NAME =			bmlib.a
 
-NAM =			bmlibb.a
-# Header for lib
-INCL = 			bmlib.h
-
+# All the source of libft
 SRC_LIB =		$(shell ls librarys/00_libft/*.c)
 
+# All the source of ft_printf
 SRC_PRI = 		$(shell ls librarys/01_ft_printf/ft_printf_bonus/*.c)
 
-SRC_GNL =		$(shell ls librarys/gnl_for_bmlib/src/*.c)
+# All the source of gnl
+SRC_GNL = 		$(shell ls librarys/gnl_for_bmlib/src/*.c)
 
-LIBFT =			librarys/00_libft/libft.a
-
-PRINTF =		librarys/01_ft_printf/libftprintf.a
-
-GNL =			librarys/gnl_for_bmlib/gnl.a
-
-CMP =			$(shell ls obj/*.o)
-
+# All the objects of libft
 OBJS_LIB =		$(SRC_LIB:.c=.o)
 
+# All the objects of ft_printf
 OBJS_PRI =		$(SRC_PRI:.c=.o)
 
+# All the objects of gnl
 OBJS_GNL =		$(SRC_GNL:.c=.o)
 
-ALL_OBJ = 		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
+# Header of bmlib
+HEAD_BMLIB =	bmlib.h
 
-FLAGS =		-Werror -Wextra -Wall
+# Header of libft
+HEAD_LIB =		$(shell ls librarys/00_libft/*.h)
 
-CC = 		gcc
+# Header of ft_printf
+HEAD_PRF =		$(shell ls librarys/01_ft_printf/ft_printf_bonus/*.h)
 
-# Path for the subMakefiles
-MAKE_LIB =		librarys/00_libft/
+# Header of gnl
+HEAD_GNL =		$(shell ls librarys/gnl_for_bmlib/src/*.h)
 
-MAKE_PRINTF =	librarys/01_ft_printf/
+# Git submodule update
+GSU =			git submodule update
 
-MAKE_GNL = 		librarys/gnl_for_bmlib/
+# Flags for GSU
+GSU_FLAGS =		--remote --merge --recursive
+
+# Variable to compile .c files
+GCC =			gcc
+
+# Flags for the gcc compilation
+FLAGS =			-Wall -Werror -Wextra
+
+# Library compilation
+AR =			ar -rcs
+
+# Remove variable
+RM =			rm -f
 
 # Colors
 DEF_COLOR =		\033[0;39m
@@ -63,79 +74,64 @@ MAGENTA =		\033[0;95m
 CYAN =			\033[0;96m
 WHITE =			\033[0;97m
 BLACK =			\033[0;99m
+ORANGE =		\033[38;5;209m
+BROWN =			\033[38;5;94m
+DARK_GRAY =		\033[38;5;234m
+MID_GRAY =		\033[38;5;245m
+RANDM =			\033[38;5;95m
+DARK_GREEN =	\033[38;5;64m
+DARK_YELLOW =	\033[38;5;143m
 
-# -------------------------- ACTIONS --------------------------
+# --------------------------------- ACTIONS ---------------------------------- #
 
-all::
-		@echo "$(YELLOW)UPDATING GIT SUBMODULES... ⌛$(GRAY)"
-		@git submodule update --remote --merge --recursive
+# Main action of the makefile, checks for submodules updates and makes bmlib
+all:
+				@$(MAKE) update
+				@$(MAKE) $(NAME)
 
-all::
-		@echo "$(BLACK)COMPILATION:"
-		@$(MAKE) $(NAME)
+update:
+#				git submodule update --init
+				$(GSU) $(GSU_FLAGS)
 
-$(NAME):: $(ALL_OBJ)
-		@echo "$(YELLOW)\nLinking...$(GRAY)"
-		@ar -rcs $(NAME) $(ALL_OBJ)
+# Compiles all the .c files of libft
+librarys/00_libft/%.o : librarys/00_libft/%.c $(HEAD_LIB) $(BMLIB)
+				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@$(GCC) $(FLAGS) -c $< -o $@
 
-$(NAME)::
-		@echo "$(GREEN)\n🌐 BMLIB COMPILED 🌐"
+# Compiles all the .c files of ft_printf
+librarys/01_ft_printf/ft_printf_bonus/%.o : librarys/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(BMLIB)
+				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@$(GCC) $(FLAGS) -c $< -o $@
 
-$(NAM):: $(LIBFT)
-		ar -x $(LIBFT)
-		mv *.o obj/
+# Compiles all the .c files of gnl
+librarys/gnl_for_bmlib/src/%.o : librarys/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(BMLIB)
+				@echo "$(BROWN)compiling: [$(DARK_GRAY)$<$(BROWN)]"
+				@$(GCC) $(FLAGS) -c $< -o $@
 
-$(NAM):: $(PRINTF)
-		ar -x $(PRINTF)
-		mv *.o obj/
-
-$(NAM):: $(GNL)
-		ar -x $(GNL)
-		mv *.o obj/
-
-$(NAM):: $(LIBFT) $(PRINTF) $(GNL)
-		ar -rcs $(NAM) $(CMP)
-
-$(LIBFT):
-		@$(MAKE) -C librarys/00_libft
-
-$(PRINTF):
-		@$(MAKE) -C librarys/01_ft_printf
-
-$(GNL):
-		@$(MAKE) -C librarys/gnl_for_bmlib
-
-$()
-
-%.o: %.c 
-		@echo "$(BLUE)compiling $(GRAY) $<"
-		@$(CC) $(FLAGS) -c $< -o $@
-
-the:
-		$(MAKE) $(NAM)
-
-bm:
-		@$(MAKE) $(NAME)
-
+# Clean all the .o files
 clean:
-		@echo "$(MAGENTA)CLEANING ALL THE OBJECTS🧹"
-		@rm -f $(ALL_OBJ)
+				@$(RM) $(OBJS_LIB)
+				@$(RM) $(OBJS_PRI)
+				@$(RM) $(OBJS_GNL)
 
+# Clean all the .o files and the bmlib.a
 fclean:
-		@$(MAKE) clean
-		@echo "$(GRAY)&& "
-		@echo "$(RED)BMLIB.A REMOVED❌$(GRAY)"
-		@rm -f	$(NAME)
+				@$(MAKE) clean
+				@$(RM) $(NAME)
 
-fcleanlibs:
-		@$(MAKE) fclean -C librarys/00_libft
-		@$(MAKE) fclean -C librarys/01_ft_printf
-		@$(MAKE) fclean -C librarys/gnl_for_bmlib
+# Clean all the .o files and the bmlib.a, and then restarts to the main action
+re:
+				@$(MAKE) fclean
+				@$(MAKE) all
 
-re:		fclean all
+# Link action
+$(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
+				@echo "$(BROWN)---------------------------------"
+				@echo "$(DARK_YELLOW)Linking...$(DEF_COLOR)"
+				@$(AR) $@ $^
+$(NAME)::
+				@echo "$(DARK_GREEN)COMPILED$(DEF_COLOR)"
 
-rebm:
-		@$(MAKE) fclean
-		@$(MAKE) bm
 
-.PHONY:		all clean fclean re rebm the
+# Action names
+.PHONY:			all update  clean fclean re bmlib.a
