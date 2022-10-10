@@ -22,7 +22,8 @@ SRC_LIB =		$(shell ls libraries/00_libft/*.c)
 SRC_PRI = 		$(shell ls libraries/01_ft_printf/ft_printf_bonus/*.c)
 
 # All the source of gnl
-SRC_GNL = 		$(shell ls libraries/gnl_for_bmlib/src/*.c | grep -x *_bonus.c)
+SRC_GNL = 		libraries/gnl_for_bmlib/src/get_next_line.c	\
+				libraries/gnl_for_bmlib/src/get_next_line_utils.c
 
 # All the objects of libft
 OBJS_LIB =		$(SRC_LIB:.c=.o)
