@@ -87,6 +87,7 @@ DARK_YELLOW =	\033[38;5;143m
 
 # Main action of the makefile, checks for submodules updates and makes bmlib
 all:
+				@printf "$(DEF_COLOR)"
 				@$(MAKE) $(NAME)
 
 # Action to update the git submodules
@@ -99,11 +100,15 @@ clean:
 				@$(RM) $(OBJS_LIB)
 				@$(RM) $(OBJS_PRI)
 				@$(RM) $(OBJS_GNL)
+				@printf "$(BROWN)All objects of bmlib $(RED)removed $(BROWN)succesfully\n"
 
 # Clean all the .o files and the bmlib.a
 fclean:
-				@$(MAKE) clean
+				@$(RM) $(OBJS_LIB)
+				@$(RM) $(OBJS_PRI)
+				@$(RM) $(OBJS_GNL)
 				@$(RM) $(NAME)
+				@printf "$(BROWN)All bmlib $(RED)removed $(BROWN)succesfully\n"
 
 # Clean all the .o files and the bmlib.a, and then restarts to the main action
 re:
@@ -116,23 +121,27 @@ rebm:
 
 # Compiles all the .c files of libft
 libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB)
-				@echo "$(BROWN)compiling:🔗[$(DARK_GRAY)$<$(BROWN)]"
+				@printf "\r                                                                                                      "
+				@printf "\r$(BROWN)compiling: .     [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of ft_printf
 libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB)
-				@echo "$(BROWN)compiling:🔗[$(DARK_GRAY)$<$(BROWN)]"
+				@printf "\r                                                                                                      "
+				@printf "\r$(BROWN)compiling:  .    [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
 libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB)
-				@echo "$(BROWN)compiling:🔗[$(DARK_GRAY)$<$(BROWN)]"
+				@printf "\r                                                                                                      "
+				@printf "\r$(BROWN)compiling:   .   [$(DARK_GRAY)$<$(BROWN)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
+				@printf "\r                                                                                                      "
 
 # Link action
 $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
-				@echo "$(BROWN)---------------------------------"
-				@echo "$(BROWN)Linking...$(DEF_COLOR)"
+				@printf "\r"
+				@printf "\r$(BROWN)Linking...$(DEF_COLOR)\n"
 				@$(AR) $@ $^
 $(NAME)::
 				@echo "$(DARK_GREEN)COMPILED ✅$(DEF_COLOR)"
