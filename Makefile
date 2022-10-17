@@ -134,7 +134,7 @@ $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 				@printf "\r$(BROWN)$(ITALIC)Linking...$(DEF_COLOR)\n"
 				@$(AR) $@ $^
 $(NAME)::
-				@echo "$(DARK_GREEN)COMPILED ✅$(DEF_COLOR)"
+				@echo "$(DARK_GREEN)BMLIB COMPILED ✅$(DEF_COLOR)"
 
 # Action names
 .PHONY:			all update bmlib clean fclean re rebm
