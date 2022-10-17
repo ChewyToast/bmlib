@@ -65,12 +65,13 @@ AR =			ar -rcs
 RM =			rm -f
 
 # Colors
+ITALIC =		\033[3m
 DEF_COLOR =		\033[0;39m
 GRAY =			\033[0;90m
 RED =			\033[0;91m
-BROWN =			\033[38;5;94m
+BROWN =			\033[38;2;184;143;29m
 DARK_GRAY =		\033[38;5;234m
-DARK_GREEN =	\033[38;5;64m
+DARK_GREEN =	\033[1m\033[38;2;75;179;82m
 
 # --------------------------------- ACTIONS ---------------------------------- #
 
@@ -130,7 +131,7 @@ libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(
 # Link action
 $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 				@printf "\r"
-				@printf "\r$(BROWN)Linking...$(DEF_COLOR)\n"
+				@printf "\r$(BROWN)$(ITALIC)Linking...$(DEF_COLOR)\n"
 				@$(AR) $@ $^
 $(NAME)::
 				@echo "$(DARK_GREEN)COMPILED ✅$(DEF_COLOR)"
