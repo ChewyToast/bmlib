@@ -64,6 +64,9 @@ AR =			ar -rcs
 # Remove variable
 RM =			rm -f
 
+# Makefile file
+MKF = Makefile
+
 # Colors
 ITALIC =		\033[3m
 DEF_COLOR =		\033[0;39m
@@ -111,19 +114,19 @@ rebm:
 				@$(MAKE) bmlib
 
 # Compiles all the .c files of libft
-libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB)
+libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB) $(MKF)
 				@printf "\r                                                                                                      "
 				@printf "\rlibft: .     [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of ft_printf
-libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB)
+libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB) $(MKF)
 				@printf "\r                                                                                                      "
 				@printf "\rlibft:  .    [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
-libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB)
+libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB) $(MKF)
 				@printf "\r                                                                                                      "
 				@printf "\rlibft:   .   [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
