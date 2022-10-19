@@ -83,7 +83,7 @@ all:
 
 # Action to update the git submodules
 update:
-				@echo "$(BROWN)Updating submodules"
+				@echo "$(DEF_COLOR)Updating submodules"
 				@$(GSU) $(GSU_FLAGS)
 
 # Clean all the .o files
@@ -91,7 +91,7 @@ clean:
 				@$(RM) $(OBJS_LIB)
 				@$(RM) $(OBJS_PRI)
 				@$(RM) $(OBJS_GNL)
-				@printf "$(BROWN)All objects of bmlib $(RED)removed $(BROWN)succesfully\n"
+				@printf "$(DEF_COLOR)All objects of bmlib $(RED)removed $(DEF_COLOR)succesfully\n"
 
 # Clean all the .o files and the bmlib.a
 fclean:
@@ -99,7 +99,7 @@ fclean:
 				@$(RM) $(OBJS_PRI)
 				@$(RM) $(OBJS_GNL)
 				@$(RM) $(NAME)
-				@printf "$(BROWN)All bmlib $(RED)removed $(BROWN)succesfully\n"
+				@printf "$(DEF_COLOR)All bmlib $(RED)removed $(DEF_COLOR)succesfully\n"
 
 # Clean all the .o files and the bmlib.a, and then restarts to the main action
 re:
@@ -113,26 +113,26 @@ rebm:
 # Compiles all the .c files of libft
 libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\r$(DARK_YELLOW)compiling: .     [$(BROWN)$<$(DARK_YELLOW)]"
+				@printf "\rlibft: .     [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of ft_printf
 libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\r$(DARK_YELLOW)compiling:  .    [$(BROWN)$<$(DARK_YELLOW)]"
+				@printf "\rlibft:  .    [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
 libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\r$(DARK_YELLOW)compiling:   .   [$(BROWN)$<$(DARK_YELLOW)]"
+				@printf "\rlibft:   .   [$(BROWN)$<$$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 				@printf "\r                                                                                                      "
 
 # Link action
 $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 				@printf "\r"
-				@printf "\r$(BROWN)$(ITALIC)Linking...$(DEF_COLOR)\n"
+				@printf "\r$(ITALIC)Linking...$(DEF_COLOR)\n"
 				@$(AR) $@ $^
 $(NAME)::
 				@echo "$(DARK_GREEN)BMLIB COMPILED ✅$(DEF_COLOR)"
