@@ -99,7 +99,7 @@ fclean:
 				@$(RM) $(OBJS_PRI)
 				@$(RM) $(OBJS_GNL)
 				@$(RM) $(NAME)
-				@printf "$(DEF_COLOR)All bmlib $(RED)removed $(DEF_COLOR)succesfully\n"
+				@printf "$(DEF_COLOR)All bmlib $(RED)removed $(DEF_COLOR)\n"
 
 # Clean all the .o files and the bmlib.a, and then restarts to the main action
 re:
@@ -125,17 +125,18 @@ libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bo
 # Compiles all the .c files of gnl
 libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\rlibft:   .   [$(BROWN)$<$$(DEF_COLOR)]"
+				@printf "\rlibft:   .   [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 				@printf "\r                                                                                                      "
 
 # Link action
 $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
 				@printf "\r"
-				@printf "\r$(ITALIC)Linking...$(DEF_COLOR)\n"
+				@printf "\r$(ITALIC)Linking...$(DEF_COLOR)"
+				@printf "\r                                 "
 				@$(AR) $@ $^
 $(NAME)::
-				@echo "$(DARK_GREEN)BMLIB COMPILED ✅$(DEF_COLOR)"
+				@echo "$(DARK_GREEN)\rBMLIB COMPILED ✅$(DEF_COLOR)"
 
 # Action names
 .PHONY:			all update bmlib clean fclean re rebm
