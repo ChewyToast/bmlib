@@ -69,6 +69,7 @@ ITALIC =		\033[3m
 DEF_COLOR =		\033[0;39m
 GRAY =			\033[0;90m
 RED =			\033[0;91m
+DARK_YELLOW =	\033[38;5;143m
 BROWN =			\033[38;2;184;143;29m
 DARK_GRAY =		\033[38;5;234m
 DARK_GREEN =	\033[1m\033[38;2;75;179;82m
@@ -112,19 +113,19 @@ rebm:
 # Compiles all the .c files of libft
 libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\r$(BROWN)compiling: .     [$(DARK_GRAY)$<$(BROWN)]"
+				@printf "\r$(DARK_YELLOW)compiling: .     [$(BROWN)$<$(DARK_YELLOW)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of ft_printf
 libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\r$(BROWN)compiling:  .    [$(DARK_GRAY)$<$(BROWN)]"
+				@printf "\r$(DARK_YELLOW)compiling:  .    [$(BROWN)$<$(DARK_YELLOW)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
 libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB)
 				@printf "\r                                                                                                      "
-				@printf "\r$(BROWN)compiling:   .   [$(DARK_GRAY)$<$(BROWN)]"
+				@printf "\r$(DARK_YELLOW)compiling:   .   [$(BROWN)$<$(DARK_YELLOW)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 				@printf "\r                                                                                                      "
 
