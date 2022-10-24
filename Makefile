@@ -68,6 +68,7 @@ RM =			rm -f
 MKF = Makefile
 
 # Colors
+DEL_LINE =		\033[2K
 ITALIC =		\033[3m
 DEF_COLOR =		\033[0;39m
 GRAY =			\033[0;90m
@@ -115,28 +116,22 @@ rebm:
 
 # Compiles all the .c files of libft
 libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB) $(MKF)
-				@printf "\r                                                                                                      "
-				@printf "\rlibft: .     [$(BROWN)$<$(DEF_COLOR)]"
+				@printf "$(DEL_LINE)\rlibft: .     [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of ft_printf
 libraries/01_ft_printf/ft_printf_bonus/%.o : libraries/01_ft_printf/ft_printf_bonus/%.c $(HEAD_PRF) $(HEAD_BMLIB) $(MKF)
-				@printf "\r                                                                                                      "
-				@printf "\rlibft:  .    [$(BROWN)$<$(DEF_COLOR)]"
+				@printf "$(DEL_LINE)\rlibft:  .    [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
 
 # Compiles all the .c files of gnl
 libraries/gnl_for_bmlib/src/%.o : libraries/gnl_for_bmlib/src/%.c $(HEAD_GNL) $(HEAD_BMLIB) $(MKF)
-				@printf "\r                                                                                                      "
-				@printf "\rlibft:   .   [$(BROWN)$<$(DEF_COLOR)]"
+				@printf "$(DEL_LINE)\rlibft:   .   [$(BROWN)$<$(DEF_COLOR)]"
 				@$(GCC) $(FLAGS) -c $< -o $@
-				@printf "\r                                                                                                      "
 
 # Link action
 $(NAME)::		$(OBJS_LIB) $(OBJS_PRI) $(OBJS_GNL)
-				@printf "\r"
-				@printf "\r$(ITALIC)Linking...$(DEF_COLOR)"
-				@printf "\r                                 "
+				@printf "$(DEL_LINE)\r$(ITALIC)Linking...$(DEF_COLOR)"
 				@$(AR) $@ $^
 $(NAME)::
 				@echo "$(DARK_GREEN)\rBMLIB COMPILED ✅$(DEF_COLOR)"
