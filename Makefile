@@ -16,14 +16,44 @@
 NAME =			bmlib.a
 
 # All the source of libft
-SRC_LIB =		$(shell ls libraries/00_libft/*.c)
+SRC_LIB =	libraries/00_libft/ft_atoi.c				libraries/00_libft/ft_putchar_fd.c	\
+			libraries/00_libft/ft_bzero.c				libraries/00_libft/ft_putendl_fd.c	\
+			libraries/00_libft/ft_calloc.c				libraries/00_libft/ft_putnbr_fd.c	\
+			libraries/00_libft/ft_isalnum.c				libraries/00_libft/ft_putstr_fd.c	\
+			libraries/00_libft/ft_isalpha.c				libraries/00_libft/ft_split.c		\
+			libraries/00_libft/ft_isascii.c				libraries/00_libft/ft_strchr.c		\
+			libraries/00_libft/ft_isdigit.c				libraries/00_libft/ft_strdup.c		\
+			libraries/00_libft/ft_isprint.c				libraries/00_libft/ft_striteri.c	\
+			libraries/00_libft/ft_itoa.c				libraries/00_libft/ft_strjoin.c		\
+			libraries/00_libft/ft_lstadd_back_bonus.c	libraries/00_libft/ft_strlcat.c		\
+			libraries/00_libft/ft_lstadd_front_bonus.c	libraries/00_libft/ft_strlcpy.c		\
+			libraries/00_libft/ft_lstclear_bonus.c		libraries/00_libft/ft_strlen.c		\
+			libraries/00_libft/ft_lstdelone_bonus.c		libraries/00_libft/ft_strmapi.c		\
+			libraries/00_libft/ft_lstiter_bonus.c		libraries/00_libft/ft_strncmp.c		\
+			libraries/00_libft/ft_lstlast_bonus.c		libraries/00_libft/ft_strnstr.c		\
+			libraries/00_libft/ft_lstmap_bonus.c		libraries/00_libft/ft_strrchr.c		\
+			libraries/00_libft/ft_lstnew_bonus.c		libraries/00_libft/ft_strrspn.c		\
+			libraries/00_libft/ft_lstsize_bonus.c		libraries/00_libft/ft_strspn.c		\
+			libraries/00_libft/ft_memchr.c				libraries/00_libft/ft_strtrim.c		\
+			libraries/00_libft/ft_memcmp.c				libraries/00_libft/ft_substr.c		\
+			libraries/00_libft/ft_memcpy.c				libraries/00_libft/ft_tolower.c		\
+			libraries/00_libft/ft_memmove.c				libraries/00_libft/ft_toupper.c		\
+			libraries/00_libft/ft_memset.c
 
 # All the source of ft_printf
-SRC_PRI = 		$(shell ls libraries/01_ft_printf/ft_printf_bonus/*.c)
+SRC_PRI = 	libraries/01_ft_printf/ft_printf_bonus/a_ft_printf_bonus.c		\
+			libraries/01_ft_printf/ft_printf_bonus/b_ft_read_bonus.c		\
+			libraries/01_ft_printf/ft_printf_bonus/ft_10to16_bonus.c		\
+			libraries/01_ft_printf/ft_printf_bonus/ft_a_convert_i_bonus.c	\
+			libraries/01_ft_printf/ft_printf_bonus/ft_itoa_bonus.c			\
+			libraries/01_ft_printf/ft_printf_bonus/ft_ptoa_bonus.c			\
+			libraries/01_ft_printf/ft_printf_bonus/ft_putchar_bonus.c		\
+			libraries/01_ft_printf/ft_printf_bonus/ft_putstr_bonus.c		\
+			libraries/01_ft_printf/ft_printf_bonus/ft_uitoa_bonus.c
 
 # All the source of gnl
-SRC_GNL = 		libraries/gnl_for_bmlib/src/get_next_line.c	\
-				libraries/gnl_for_bmlib/src/get_next_line_utils.c
+SRC_GNL = 	libraries/gnl_for_bmlib/src/get_next_line.c	\
+			libraries/gnl_for_bmlib/src/get_next_line_utils.c
 
 # All the objects of libft
 OBJS_LIB =		$(SRC_LIB:.c=.o)
@@ -38,13 +68,13 @@ OBJS_GNL =		$(SRC_GNL:.c=.o)
 HEAD_BMLIB =	bmlib.h
 
 # Header of libft
-HEAD_LIB =		$(shell ls libraries/00_libft/*.h)
+HEAD_LIB =		libraries/00_libft/libft.h
 
 # Header of ft_printf
-HEAD_PRF =		$(shell ls libraries/01_ft_printf/ft_printf_bonus/*.h)
+HEAD_PRF =		libraries/01_ft_printf/ft_printf_bonus/ft_printf_bonus.h
 
 # Header of gnl
-HEAD_GNL =		$(shell ls libraries/gnl_for_bmlib/src/*.h)
+HEAD_GNL =		libraries/gnl_for_bmlib/src/get_next_line_bonus.h
 
 # Git submodule update
 GSU =			git submodule update
@@ -65,7 +95,7 @@ AR =			ar -rcs
 RM =			rm -f
 
 # Makefile file
-MKF = Makefile
+MKF =			Makefile
 
 # Colors
 DEL_LINE =		\033[2K
@@ -110,10 +140,6 @@ re:
 				@$(MAKE) fclean
 				@$(MAKE) all
 
-rebm:
-				@$(MAKE) fclean
-				@$(MAKE) bmlib
-
 # Compiles all the .c files of libft
 libraries/00_libft/%.o : libraries/00_libft/%.c $(HEAD_LIB) $(HEAD_BMLIB) $(MKF)
 				@printf "$(DEL_LINE)\rlibft: .     [$(BROWN)$<$(DEF_COLOR)]"
@@ -137,4 +163,4 @@ $(NAME)::
 				@echo "$(DARK_GREEN)\rBMLIB COMPILED ✅$(DEF_COLOR)"
 
 # Action names
-.PHONY:			all update bmlib clean fclean re rebm
+.PHONY:			all update clean fclean re
