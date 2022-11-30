@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bmoll-pe <bmoll-pe@student.42bcn>          +#+  +:+       +#+         #
+#    By: bmoll-pe <bmoll-pe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/10 04:23:57 by bmoll-pe          #+#    #+#              #
-#    Updated: 2022/10/10 04:24:02 by bmoll-pe         ###   ########.fr        #
+#    Updated: 2022/11/30 13:52:49 by bmoll-pe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SRC_LIB =	libraries/00_libft/ft_atoi.c				libraries/00_libft/ft_putchar_fd.c	\
 			libraries/00_libft/ft_memcmp.c				libraries/00_libft/ft_substr.c		\
 			libraries/00_libft/ft_memcpy.c				libraries/00_libft/ft_tolower.c		\
 			libraries/00_libft/ft_memmove.c				libraries/00_libft/ft_toupper.c		\
-			libraries/00_libft/ft_memset.c
+			libraries/00_libft/ft_memset.c				libraries/00_libft/ft_isspace.c
 
 # All the source of ft_printf
 SRC_PRI = 	libraries/01_ft_printf/ft_printf_bonus/a_ft_printf_bonus.c		\
